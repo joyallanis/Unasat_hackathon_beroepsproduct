@@ -19,4 +19,28 @@ public class ViewStudents {
             System.out.println("Error: " + ex.getMessage());  // Print out the error message associated with the SQLException.
         }
     }
+    
+        public void ViewTeams() {
+        try (Connection conn = DatabaseConnection.getConnection()) {  
+            String sql = "SELECT * FROM team and student_id, naam, achter_naam from student and unasat_emailadres from contact_gegevens";  
+            PreparedStatement stmt = conn.prepareStatement(sql);  
+            ResultSet rs = stmt.executeQuery();  
+            while (rs.next()) {  
+                int teamid = rs.getInt ("team_id");                                                              //get data from the team table
+                String teamname = rs.getString( "team_naam");   
+                int studentid = rs.getInt ("student_id");                                                       //get data from the student table
+                String first = rs.getString ("naam");
+                String last = rs.getString ("achter_naam");
+                String email = rs.getString ("unasat_emailadres");                                             //get data from the contact_gegevens table
+                System.out.println ("Team: /n ID: " + teamid + ", Name: " + teamname );                                                                                          
+                System.out.println ("Members: /n ID: " + studentid + ", Name: " + first + last + ", E-mailadres: " + unasat_emailadres );  
+            }
+            rs.close();  
+            stmt.close();  
+        } 
+        catch (SQLException ex) {  
+            System.out.println("Error: " + ex.getMessage());  
+        }
+    }
 }
+
