@@ -40,9 +40,9 @@ public class ViewStudents {
                 if (!teamMap.containsKey(teamid)) { // Check if team has already been printed by checking if its ID is in the HashMap
                     System.out.println("\033[34mTeam:\033[0m"); // Print the word "Team:" in blue color using an escape code
                     System.out.println("\033[34mID:\033[0m " + teamid + ", \033[34mName:\033[0m " + teamname ); // Print the team ID and name in blue color using an escape code
+                    System.out.println("\033[34mMembers:\033[0m"); // Print the word "Members:" in blue color using an escape code
                     teamMap.put(teamid, teamname); // Add the team to the HashMap
                 }
-                System.out.println("\033[34mMembers:\033[0m"); // Print the word "Members:" in blue color using an escape code
                 System.out.println("\033[34mID:\033[0m " + studentid + ", \033[34mName:\033[0m " + first + " " + last + ", \033[34mE-mailadres:\033[0m " + email ); // Print the student ID, name, and email in blue color using an escape code
             }
             rs.close(); // Close the result set
