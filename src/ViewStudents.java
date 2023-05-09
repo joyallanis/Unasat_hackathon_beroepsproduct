@@ -9,9 +9,14 @@ public class ViewStudents {
         Scanner scanner = new Scanner(System.in); // Create a scanner object to read user input
         String choice; // Declare a string variable to hold the user's choice
         do {
-            System.out.println("Choose an option below then enter: "); // Print instructions for user
-            System.out.println("View Teams"); // Print option to view teams
-            System.out.println("Return"); // Print option to return to previous menu
+            System.out.println("\u001B[38;5;208m" + "Choose an option below then enter: ");
+            System.out.print("\033[0m");
+            System.out.print("\033[38;5;208m" + "| " + "\033[0m"); // Make the left | blue
+            System.out.print("\033[38;5;33m" + "View Teams" + "\033[0m"); // Make the left orange
+            System.out.print("\033[38;5;208m" + " | " + "\033[0m"); // Make the middle | orange
+            System.out.print("\033[38;5;33m" + "Return" + "\033[0m"); // Make the option blue
+            System.out.print("\033[38;5;208m" + " | " + "\033[0m"); // Make the right | orange
+            System.out.println();
             choice = scanner.nextLine().toLowerCase(); // Read user input and convert it to lowercase
             switch (choice) { // Check the value of the user's input
                 case "view teams" -> ViewTeams(); // If the user wants to view teams, call the ViewTeams method

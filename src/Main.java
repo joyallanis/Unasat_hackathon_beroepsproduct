@@ -1,25 +1,46 @@
-import java.util.Scanner;  // Import the Scanner class from the java.util package.
-import java.util.Objects;  // Import the Objects class from the java.util package.
+import java.util.Scanner;
+import java.util.Objects;
 
 public class Main {
-    static ViewStudents view = new ViewStudents();  // Create a static ViewStudents object named view.
-    static DatabaseConnection connection = new DatabaseConnection();  // Create a static DatabaseConnection object named connection.
+    static ViewStudents view = new ViewStudents();
+    static Register register = new Register();
+    static DatabaseConnection connection = new DatabaseConnection();
 
     public static void main(String[] args) {
-        System.out.println("\u001B[38;5;208m" + "Welcome to UNASAT HACKATHON");  // Print a welcome message to the console in yellow text.
-        System.out.print("\033[0m");  // Reset the console text color.
-        Scanner scanner = new Scanner(System.in);  // Create a new Scanner object named scanner to read user input from the console.
-        String choice;  // Declare a String variable named choice.
+        System.out.println("\u001B[38;5;208m" + "Welcome to UNASAT HACKATHON");
+        System.out.print("\033[0m");
+        Scanner scanner = new Scanner(System.in);
+        String choice;
         do {
-            System.out.println("Choose an option below then enter: ");  // Print a message to the console.
-            System.out.println("View");  // Print a message to the console.
-            System.out.println("Exit");  // Print a message to the console.
-            choice = scanner.next().toLowerCase();  // Read the user's input from the console and store it in the choice variable.
-            switch (choice) {  // Use a switch statement to determine which code to execute based on the user's choice.
-                case "view" -> view.View();  // If the user enters "view", call the viewStudents() method of the view object.
-                case "exit" -> System.out.println("Exiting program...");  // If the user enters "exit", print a message to the console.
-                default -> System.out.println("Invalid choice.");  // If the user enters anything else, print an error message to the console.
+            System.out.println("\u001B[38;5;208m" + "Choose an option below then enter: ");
+            System.out.print("\033[0m");
+            System.out.print("\033[38;5;208m" + "| " + "\033[0m"); // Make the left | blue
+            System.out.print("\033[38;5;33m" + "View" + "\033[0m"); // Make the left orange
+            System.out.print("\033[38;5;208m" + " | " + "\033[0m"); // Make the middle | orange
+            System.out.print("\033[38;5;33m" + "Register" + "\033[0m"); // Make the option blue
+            System.out.print("\033[38;5;208m" + " | " + "\033[0m"); // Make the right | orange
+            System.out.print("\033[38;5;33m" + "Exit" + "\033[0m"); // Make the option blue
+            System.out.print("\033[38;5;208m" + " | " + "\033[0m"); // Make the right | orange
+            System.out.println();
+            choice = scanner.next().toLowerCase();
+            switch (choice) {
+                case "view" -> view.View();
+                case "register"-> register.RegisterTeam();
+                case "exit" -> {
+                    System.out.print("\033[38;5;208m" + "Exiting Program" + "\033[0m");
+                    for (int i = 0; i < 3; i++) {
+                        try {
+                            Thread.sleep(500);
+                            System.out.print("\033[38;5;208m" + "." + "\033[0m");
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    System.out.println();
+                    System.exit(0);
+                }
+                default -> System.out.println("Invalid choice.");
             }
-        } while (!Objects.equals(choice, "exit"));  // Repeat the loop until the user enters "exit".
+        } while (!Objects.equals(choice, "exit"));
     }
 }
