@@ -1,3 +1,8 @@
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Scanner;
+
 public class Delete {
     public void DeleteInformation() {
         try (Connection conn = DatabaseConnection.getConnection()) { // Get a connection to the database
