@@ -1,9 +1,12 @@
 import java.awt.*;
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.Scanner;
+
 public class Register {
-    public void RegisterTeam(){
-        try(Connection conn = DatabaseConnection.getConnection()){
+    public void RegisterTeam() {
+        try (Connection conn = DatabaseConnection.getConnection()) {
             Scanner scanner = new Scanner(System.in);
 
             System.out.print("Team name: ");
@@ -18,11 +21,13 @@ public class Register {
             System.out.print("Student number: ");
             String student_number1 = scanner.next();
 
-            System.out.print("Age: ");
-            int age1 = Integer.parseInt(scanner.next());
-
             System.out.print("Birth date(2002-04-09): ");
             String birth_date1 = scanner.next();
+            LocalDate birthdate1 = LocalDate.parse(birth_date1);
+            LocalDate current_date = LocalDate.now();
+
+            Period age_1 = Period.between(birthdate1, current_date);
+            int age1 = age_1.getYears();
 
             System.out.print("Skill: ");
             String skill1 = scanner.next();
@@ -30,8 +35,16 @@ public class Register {
             System.out.print("Contact number: ");
             int contact_number1 = Integer.parseInt(scanner.next());
 
-            System.out.print("Unasat Email Adress: ");
-            String email_adres1 = scanner.next();
+            String email_adres1 = null;
+            while (true) {
+                System.out.print("Unasat Email Address: ");
+                email_adres1 = scanner.next();
+                if (email_adres1.contains("@unasat.sr")) {
+                    break;
+                } else {
+                    System.out.println("\u001B[31mInvalid email address\u001B[0m");
+                }
+            }
 
             System.out.print("Residence: ");
             String residence1 = scanner.next();
@@ -46,32 +59,40 @@ public class Register {
             System.out.print("Student number: ");
             String student_number2 = scanner.next();
 
-            System.out.print("Age: ");
-            int age2 = Integer.parseInt(scanner.next());
-
             System.out.print("Birth date(2002-04-09): ");
             String birth_date2 = scanner.next();
 
+            LocalDate birthdate2 = LocalDate.parse(birth_date2);
+            Period age_2 = Period.between(birthdate2, current_date);
+            int age2 = age_2.getYears();
             System.out.print("Skill: ");
             String skill2 = scanner.next();
 
             System.out.print("Contact number: ");
             int contact_number2 = Integer.parseInt(scanner.next());
 
-            System.out.print("Unasat Email Adress: ");
-            String email_adres2 = scanner.next();
+            String email_adres2 = null;
+            while (true) {
+                System.out.print("Unasat Email Address: ");
+                email_adres2 = scanner.next();
+                if (email_adres2.contains("@unasat.sr")) {
+                    break;
+                } else {
+                    System.out.println("\u001B[31mInvalid email address\u001B[0m");
+                }
+            }
 
             System.out.print("Residence: ");
             String residence2 = scanner.next();
 
-            String insertTeamSql = "INSERT INTO TEAM(team_naam) values(?)";
+            String insertTeamSql = "INSERT INTO TEAM(team_naam) VALUES(?)";
             PreparedStatement insertTeamstmt = conn.prepareStatement(insertTeamSql, Statement.RETURN_GENERATED_KEYS);
             insertTeamstmt.setString(1, teamName);
             insertTeamstmt.executeUpdate();
 
             ResultSet generatedKeysTeam = insertTeamstmt.getGeneratedKeys();
-            int teamId =-1;
-            if(generatedKeysTeam.next()){
+            int teamId = -1;
+            if (generatedKeysTeam.next()) {
                 teamId = generatedKeysTeam.getInt(1);
             }
 
@@ -108,7 +129,7 @@ public class Register {
             insertStudentStmt.setDate(5, Date.valueOf(birth_date1));
             insertStudentStmt.setString(6, skill1);
             insertStudentStmt.setInt(7,teamId);
-            insertStudentStmt.setInt(8, contactId2);
+            insertStudentStmt.setInt(8, contactId1);
             insertStudentStmt.executeUpdate();
 
             insertStudentStmt.setString(1, firstName2);
