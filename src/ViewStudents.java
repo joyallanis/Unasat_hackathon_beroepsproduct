@@ -23,7 +23,7 @@ public class ViewStudents {
             switch (choice) { // Check the value of the user's input
                 case "view teams" -> ViewTeams(); // If the user wants to view teams, call the ViewTeams method
                 case "search team" -> SearchTeamInfo(); // If the user wants to search spedific team information, cal the SearchTeamInfo method
-                case "return" -> System.out.println("Returning to menu"); // If the user wants to return, print a message
+                case "return" -> System.out.println("\nReturning to menu...\n"); // If the user wants to return, print a message
                 default -> System.out.println("Invalid choice."); // If the user enters something else, print an error message
             }
         } while (!Objects.equals(choice, "return")); // Continue looping until the user chooses to return
@@ -46,7 +46,7 @@ public class ViewStudents {
                 String last = rs.getString("achter_naam"); // Get the last name of the student from the current row
                 String email = rs.getString("unasat_emailadres"); // Get the email of the student from the current row
                 if (!teamMap.containsKey(teamid)) { // Check if team has already been printed by checking if its ID is in the HashMap
-                    System.out.println("\033[34mTeam:\033[0m"); // Print the word "Team:" in blue color using an escape code
+                    System.out.println("\n\033[34mTeam:\033[0m"); // Print the word "Team:" in blue color using an escape code
                     System.out.println("\033[34mID:\033[0m " + teamid + ", \033[34mName:\033[0m " + teamname ); // Print the team ID and name in blue color using an escape code
                     System.out.println("\033[34mMembers:\033[0m"); // Print the word "Members:" in blue color using an escape code
                     teamMap.put(teamid, teamname); // Add the team to the HashMap
@@ -59,7 +59,7 @@ public class ViewStudents {
             System.out.println("Error: " + ex.getMessage()); // Print the error message
         }
     }
-    
+
     public void SearchTeamInfo() {
         Scanner scanner = new Scanner(System.in); // Create a scanner object to read user input
         System.out.println("\nEnter team name: "); // Ask for user input
